@@ -16,6 +16,22 @@ export default class Main extends Component {
     index: -1,
   };
 
+  //componentDidxxxx = no react, é uma função que executa quando xxxx. (como se fosse eventlistener)
+  componentDidUpdate(prevProperties, prevState) {
+    const { tarefas } = this.state;
+
+    if (tarefas === prevState.tarefas) return;
+    localStorage.setItem('tarefas', JSON.stringify(tarefas));
+  }
+
+  componentDidMount() {
+    const tarefas = JSON.parse(localStorage.getItem('tarefas'));
+
+    if (!tarefas) return;
+
+    this.setState({ tarefas });
+  }
+
   // nome das funções nos jsx geralmente são handle
   handleChange = (e) => {
     this.setState({
