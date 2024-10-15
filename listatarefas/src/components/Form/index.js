@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 //Form button icon
 import { FaPlus } from 'react-icons/fa';
 
-import './Form.css';
+import './Form.css'; //        vai puxar do props la do main.js
 export default function Form({ handleSubmit, handleChange, novaTarefa }) {
   return (
     <form action="#" onSubmit={handleSubmit} className="form">
