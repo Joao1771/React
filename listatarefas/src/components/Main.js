@@ -1,9 +1,8 @@
 import React, { Component } from 'react';
 import './Main.css';
-//Form button icon
-import { FaPlus } from 'react-icons/fa';
-//Tarefa edit delete icons
-import { FaEdit, FaWindowClose } from 'react-icons/fa';
+
+import Form from './Form';
+import Tarefas from './Tarefas';
 
 export default class Main extends Component {
   /*
@@ -15,9 +14,8 @@ export default class Main extends Component {
     tarefas: [],
     index: -1,
   };
-
   //componentDidxxxx = no react, é uma função que executa quando xxxx. (como se fosse eventlistener)
-  componentDidUpdate(prevProperties, prevState) {
+  componentDidUpdate(prevProps, prevState) {
     const { tarefas } = this.state;
 
     if (tarefas === prevState.tarefas) return;
@@ -88,30 +86,17 @@ export default class Main extends Component {
       <div className="main">
         <h1>Lista de tarefas</h1>
 
-        <form action="#" onSubmit={this.handleSubmit} className="form">
-          <input onChange={this.handleChange} type="text" value={novaTarefa} />
-          <button type="submit">
-            <FaPlus />
-          </button>
-        </form>
+        <Form
+          handleSubmit={this.handleSubmit}
+          handleChange={this.handleChange}
+          novaTarefa={novaTarefa}
+        />
         {/* no jsx o javascript fica dentro de {}*/}
-        <ul className="tarefas">
-          {tarefas.map((tarefa, index) => (
-            <li key={tarefa}>
-              {tarefa}
-              <div>
-                <FaEdit
-                  onClick={(e) => this.handleEdit(e, index)}
-                  className="edit-i"
-                />
-                <FaWindowClose
-                  onClick={(e) => this.handleDelete(e, index)}
-                  className="delete-i"
-                />
-              </div>
-            </li>
-          ))}
-        </ul>
+        <Tarefas
+          handleEdit={this.handleEdit}
+          handleDelete={this.handleDelete}
+          tarefas={tarefas}
+        />
       </div>
     );
   }
